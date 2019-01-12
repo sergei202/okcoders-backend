@@ -68,10 +68,22 @@ Along with routes, Express uses _request_ (`req`) and _response_ (`res`) objects
 We can pass dynamic data to our route handlers using URL params.
 URL params are defined with a `:name` in the route.  If we have a route of `/hello/:name` and hit `/hello/Sergei`, `req.params.name` will equal `'Sergei'`.
 
+#### Query Params
+You can send data to a route handler using query params as well.
+
+Query params look like: `/signup?name=Sergei&age=34`.
+Notice that they start after the `?` and alwyas follow the format of `name=value` and separated with `&`.
+
+The url above will result in `req.query` being `{name:'Sergei', age:34}`.
+
+#### POST Requests
+So far we have only talked about GET requests.  POST requests allow us to send a payload, usually JSON, to the server.  If JSON, it will show up in `req.body`.
+
 ### Examples
 - `express/hello-world.js`
 - `express/counter.js`
 - `express/add.js`
+- `express/post.js`
 
 ### Links
 - [Express Hello World](http://expressjs.com/en/starter/hello-world.html)

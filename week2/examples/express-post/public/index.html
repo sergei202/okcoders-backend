@@ -1,0 +1,25 @@
+<html>
+	<body>
+		<h1>Express Post</h1>
+		<script>
+			fetch('/api').then(res => res.json()).then(json => {
+				console.log('json: %o', json);
+			}, err => {
+				console.error(err);
+			});
+
+			fetch('/api', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({count:4})
+			}).then(res => res.json()).then(json => {
+				console.log('json: %o', json);
+			}, err => {
+				console.error(err);
+			});
+		</script>
+	</body>
+</html>

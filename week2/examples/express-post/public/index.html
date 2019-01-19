@@ -2,24 +2,24 @@
 	<body>
 		<h1>Express Post</h1>
 		<script>
-			fetch('/api').then(res => res.json()).then(json => {
-				console.log('json: %o', json);
-			}, err => {
-				console.error(err);
-			});
+			function getRequest(url) {
+				return fetch(url)
+					.then(res => res.json());
+			}
+			function postRequest(url,body) {
+				return fetch(url, {
+					method: 'POST',
+					body: JSON.stringify(body),
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					}
+				});
+			}
 
-			fetch('/api', {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({count:4})
-			}).then(res => res.json()).then(json => {
-				console.log('json: %o', json);
-			}, err => {
-				console.error(err);
-			});
+			postRequest('/item', {name:'NEW2'})
+				.then(() => getRequest('/item'))
+				.then(item => console.log(item));
 		</script>
 	</body>
 </html>

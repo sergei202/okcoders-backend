@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<title>Voting</title>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<h1>Vote Here</h1>
+
+		<img class="btn1" src="http://independentflorida.com/wp-content/uploads/2016/01/what-if-im-not-voting-Just-vote.jpg">
+		<span class="votes1">0</span>
+		<img class="btn2" src="http://independentflorida.com/wp-content/uploads/2016/01/what-if-im-not-voting-Just-vote.jpg">
+		<span class="votes2">0</span>
+		<script>
+			fetch('/votes').then(res => res.json()).then(votes => {
+				console.log(votes);
+				$('.votes1').html(votes.votesA);
+				$('.votes2').html(votes.votesB);
+			});
+
+			$('.btn1').on('click', () => {
+				fetch('/a').then(res => res.json()).then(votes => {
+					console.log(votes);
+					$('.votes1').html(votes.votesA);
+					$('.votes2').html(votes.votesB);
+				});
+			});
+			$('.btn2').on('click', () => {
+				fetch('/b').then(res => res.json()).then(votes => {
+					console.log(votes);
+					$('.votes1').html(votes.votesA);
+					$('.votes2').html(votes.votesB);
+				});
+			});
+		</script>
+
+	</body>
+</html>

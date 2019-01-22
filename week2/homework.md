@@ -15,7 +15,7 @@ Here are the basic pieces:
 
 The stateful data will be an array of tasks.  Each task will be an object with a `name` and `completed` property.
 
-You'll also create creating functions that allow you to _interface_ between the GUI and your data:
+You'll also create functions that allow you to interface between the GUI and your data:
 - `getTasks()`
 - `addTask(name)`
 - `toggleTask(name)`
@@ -35,9 +35,8 @@ You'll move your `tasks` and interface functions to the backend.
 
 ### Add express routes
 I suggest these routes:
-	- GET `/tasks`
-	- POST `/task`
-	- POST `/toggle`
+- GET `/tasks`
+- POST `/task`
+- POST `/toggle`
 
 Finally, change the frontend to use these routes.
-

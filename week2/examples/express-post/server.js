@@ -10,13 +10,14 @@ app.listen(3000);
 console.log('Listening on port 3000');
 
 
-var item = 'Nothing';
+var items = [];
 
-app.get('/item', (req,res) => {
-	res.json(item);
+app.get('/items', (req,res) => {
+	res.json(items);
 });
 
 app.post('/item', (req,res) => {
 	item = req.body;
-	res.json(item);
+	items.push(item);
+	res.json(items);
 });

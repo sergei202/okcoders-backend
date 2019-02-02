@@ -16,7 +16,14 @@ function addTask(name) {
 
 function toggleTask(name) {
 	$.post('/toggle', {name:name}).then(tasks => {
-		console.log('toggleTask: ', tasks);
+		console.log('toggleTask: result=%o', tasks);
+		displayTasks(tasks);
+	});
+}
+
+function deleteTask(name) {
+	console.log('deleteTask: name=%o', name);
+	$.post('/delete', {name:name}).then(tasks => {
 		displayTasks(tasks);
 	});
 }
@@ -27,14 +34,27 @@ function displayTasks(tasks) {
 	ul.empty();
 	tasks.forEach(task => {
 		var li = $('<li>');
-		li.text(task.name);
-		if(task.completed) li.addClass('completed');
+		li.attr('name', task.name);
+
+		var name = $('<span>');
+		name.text(task.name);
+		li.append(name);
+
+		if(task.completed) name.addClass('completed');
 		ul.append(li);
 
-		li.click(function() {
-			var li = $(this);
-			toggleTask(li.text());
+		name.click(function() {
+			var li = $(this).parent('li');
+			toggleTask(li.attr('name'));
 		});
+
+		var deleteBtn = $('<span class="deleteBtn">X</span>');
+		li.append(deleteBtn);
+		deleteBtn.click(function() {
+			var li = $(this).parent('li');
+			deleteTask(li.attr('name'));
+		});
+
 	});
 }
 

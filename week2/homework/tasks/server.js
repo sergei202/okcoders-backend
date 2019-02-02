@@ -37,6 +37,13 @@ function toggleTask(name) {
 	return true;
 }
 
+function deleteTask(name) {
+	var task = tasks.find(t => t.name===name);
+	var index = tasks.indexOf(task);
+	if(index===-1) return;
+	tasks.splice(index,1);
+}
+
 
 app.get('/tasks', (req,res) => {
 	res.json(getTasks());
@@ -51,5 +58,11 @@ app.post('/tasks', (req,res) => {		// body: {name}
 app.post('/toggle',  (req,res) => {		// body: {name}
 	console.log('POST /toggle: ', req.body);
 	toggleTask(req.body.name);
+	res.json(getTasks());
+});
+
+app.post('/delete',  (req,res) => {		// body: {name}
+	console.log('POST /delete: ', req.body);
+	deleteTask(req.body.name);
 	res.json(getTasks());
 });
